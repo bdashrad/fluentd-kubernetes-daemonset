@@ -260,6 +260,14 @@
   @id filter_kube_metadata
 </filter>
 
+<% if is_v1 %>
+<filter kubernetes.var.log.containers.**.log>
+  @type parser
+  format json
+  key_name log
+</filter>
+<% end %>
+
 <% case target when "papertrail" %>
 <filter kube-apiserver-audit>
   @type record_transformer
